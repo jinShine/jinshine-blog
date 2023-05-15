@@ -4,14 +4,17 @@ import {
   PartialPageObjectResponse,
 } from '@notionhq/client/build/src/api-endpoints'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 type ProjectItemProps = {
   blogData: PageObjectResponse | PartialPageObjectResponse
 }
 
 export default function ProjectItem(props: ProjectItemProps) {
+  const router = useRouter()
+
   return (
-    <Box>
+    <Box onClick={() => router.push(props.blogData.id)}>
       <Image
         src={props.blogData.cover.external.url}
         alt="커버이미지"

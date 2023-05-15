@@ -1,9 +1,10 @@
 import { Client } from '@notionhq/client'
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 import { CONFIG } from 'config'
-import { NotionCompatAPI } from 'notion-compat'
+import { NotionAPI } from 'notion-client'
 import { ExtendedRecordMap, SearchParams, SearchResults } from 'notion-types'
 
-const notion = new NotionCompatAPI(new Client({ auth: CONFIG.notion.token }))
+const notion = new NotionAPI()
 
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   const recordMap = await notion.getPage(pageId)
@@ -12,4 +13,23 @@ export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
 
 export async function search(params: SearchParams): Promise<SearchResults> {
   return notion.search(params)
+}
+
+export async function getPosts(): Promise<QueryDatabaseResponse> {
+  const notion = new Client({ auth: CONFIG.notion.token })
+  const databaseId = CONFIG.notion.rootDatabaseId as string
+  const response = await notion.databases.query({
+    database_id: databaseId,
+    filter: {
+      or: [],
+    },
+    sorts: [
+      {
+        property: 'createdAt',
+        direction: 'ascending',
+      },
+    ],
+  })
+
+  return response
 }

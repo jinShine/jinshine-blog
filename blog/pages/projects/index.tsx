@@ -1,21 +1,18 @@
 import { Box } from '@chakra-ui/react'
-import { Client } from '@notionhq/client'
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
-import { CONFIG } from 'config'
+import { getPosts } from 'src/common/libraries/notion/notion'
 import ProjectItem from 'src/components/projects/ProjectItem'
 
 type ProjectsProps = {
-  blogDatas: QueryDatabaseResponse
+  posts: QueryDatabaseResponse
 }
 
-const notion = new Client({ auth: CONFIG.notion.token })
-
 export default function Projects(props: ProjectsProps) {
-  console.log(props.blogDatas)
+  console.log(props.posts)
   return (
     <>
-      <Box>총 프로젝트 : {props.blogDatas.results.length}</Box>
-      {props.blogDatas.results.map(blog => (
+      <Box>총 프로젝트 : {props.posts.results.length}</Box>
+      {props.posts.results.map(blog => (
         <ProjectItem key={blog.id} blogData={blog} />
       ))}
     </>
@@ -23,27 +20,11 @@ export default function Projects(props: ProjectsProps) {
 }
 
 export async function getStaticProps() {
-  const fetchBlogs = async () => {
-    const databaseId = CONFIG.notion.rootDatabaseId as string
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      filter: {
-        or: [],
-      },
-      sorts: [
-        {
-          property: 'createdAt',
-          direction: 'ascending',
-        },
-      ],
-    })
+  const posts = await getPosts()
 
-    return response
-  }
-  const blogDatas = await fetchBlogs()
-  console.log('## blogDatas', blogDatas.results)
+  console.log('# blog 데이터', posts.results)
 
   return {
-    props: { blogDatas },
+    props: { posts },
   }
 }
