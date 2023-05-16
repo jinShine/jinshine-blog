@@ -8,6 +8,9 @@ import { getPageTitle } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 
 import { Loading } from './Loading'
+import { CONFIG } from 'config'
+import Image from 'next/image'
+import { useColorMode } from '@chakra-ui/react'
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
@@ -81,8 +84,10 @@ export const NotionPage = ({
   previewImagesEnabled?: boolean
   rootPageId?: string
   rootDomain?: string
+  darkMode?: boolean
 }) => {
   const router = useRouter()
+  const { colorMode, toggleColorMode } = useColorMode()
 
   if (router.isFallback) {
     return <Loading />
@@ -104,8 +109,8 @@ export const NotionPage = ({
     g.block = block
   }
 
-  const socialDescription = 'React Notion X Demo'
-  const socialImage = 'https://react-notion-x-demo.transitivebullsh.it/social.jpg'
+  const socialDescription = CONFIG.blog.description
+  const socialImage = CONFIG.profile.image
 
   return (
     <>
@@ -137,10 +142,8 @@ export const NotionPage = ({
 
       <NotionRenderer
         recordMap={recordMap}
-        fullPage={true}
-        darkMode={false}
-        rootDomain={rootDomain}
-        rootPageId={rootPageId}
+        darkMode={colorMode === 'dark'}
+        fullPage={false}
         components={{
           nextLink: Link,
           Code,
@@ -148,6 +151,7 @@ export const NotionPage = ({
           Equation,
           Pdf,
           Modal,
+          nextImage: Image,
         }}
       />
     </>
