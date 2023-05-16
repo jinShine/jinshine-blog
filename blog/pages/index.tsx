@@ -1,7 +1,7 @@
 import { VStack } from '@chakra-ui/react'
 import { CONFIG } from 'config'
 import { convertPostDatas } from 'src/common/libraries/notion/convertPostDatas'
-import { getPosts } from 'src/common/libraries/notion/notion'
+import { getPosts } from 'src/common/libraries/notion/notionAPI'
 import { TNotionPost } from 'src/common/libraries/notion/types'
 import Layout from 'src/components/Layouts'
 import PostItem from 'src/components/units/post_item'

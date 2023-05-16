@@ -20,17 +20,16 @@ export default function Header() {
       px={4}
       position={'sticky'}
       top={0}
-      height={'70px'}
+      height={'60px'}
       width={'100%'}
       zIndex={999}>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <Button variant={'ghost'} onClick={() => router.push('/')}>
-          Logo
+        <Button variant={'ghost'} fontWeight={800} onClick={() => router.push('/')}>
+          jinShine 블로그
         </Button>
-
         <Flex alignItems={'center'}>
           <Stack direction={'row'} spacing={7}>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} size={'sm'}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
 

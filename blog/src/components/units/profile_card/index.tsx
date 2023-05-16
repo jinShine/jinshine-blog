@@ -14,10 +14,10 @@ export default function ProfileCard() {
         <Text fontSize={22} fontWeight={'bold'}>
           {CONFIG.profile.nickname}
         </Text>
-        <Text fontSize={14} fontWeight={500} color={'#6B7280'}>
+        <Text fontSize={16} fontWeight={500} color={'#6B7280'}>
           {CONFIG.profile.role}
         </Text>
-        <Text fontSize={14} fontWeight={600} pt={5}>
+        <Text fontSize={16} fontWeight={600} pt={5} pb={5}>
           {CONFIG.profile.description}
         </Text>
       </VStack>
