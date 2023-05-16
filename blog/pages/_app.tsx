@@ -6,6 +6,7 @@ import ChakraUISetting from 'src/common/libraries/chakraUI'
 import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'react-notion-x/src/styles.css'
+import { GlobalProvider } from 'src/common/context/globalContext'
 
 export type NextPageWithLayout<PageProps = {}> = NextPage<PageProps> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -18,7 +19,11 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || (page => page)
 
-  return <ChakraUISetting>{getLayout(<Component {...pageProps} />)}</ChakraUISetting>
+  return (
+    <GlobalProvider>
+      <ChakraUISetting>{getLayout(<Component {...pageProps} />)}</ChakraUISetting>
+    </GlobalProvider>
+  )
 }
 
 export default MyApp
