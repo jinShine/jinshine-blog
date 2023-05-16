@@ -1,3 +1,4 @@
+import { VStack } from '@chakra-ui/react'
 import { CONFIG } from 'config'
 import { convertPostDatas } from 'src/common/libraries/notion/convertPostDatas'
 import { getPosts } from 'src/common/libraries/notion/notion'
@@ -5,7 +6,6 @@ import { TNotionPost } from 'src/common/libraries/notion/types'
 import Layout from 'src/components/Layouts'
 import PostItem from 'src/components/units/post_item'
 import { NextPageWithLayout } from './_app'
-import { HStack, VStack } from '@chakra-ui/react'
 
 type HomeProps = {
   posts: TNotionPost[]
@@ -23,7 +23,7 @@ export async function getStaticProps() {
 
 const HomePage: NextPageWithLayout<HomeProps> = (props: HomeProps) => {
   return (
-    <VStack width={'100%'}>
+    <VStack width={'100%'} spacing={10}>
       {props.posts.map(post => (
         <PostItem key={post.id} postData={post} />
       ))}

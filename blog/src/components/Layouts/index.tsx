@@ -21,22 +21,36 @@ export default function Layout(props: LayoutProps) {
         maxW={'1120px'}
         h={'100vh'}
         mt={5}
+        mb={10}
         templateRows={'repeat(1, 1fr)'}
         templateColumns={'repeat(3, 1fr)'}>
         <GridItem
           rowSpan={1}
           colSpan={1}
           height={'full'}
-          overflow={'scroll'}
+          overflow={'auto'}
           pl={5}
           mr={10}
-          __css={{ '&::-webkit-scrollbar': { display: 'none' } }}>
+          sx={{
+            '::-webkit-scrollbar': {
+              display: 'none',
+            },
+          }}>
           <VStack spacing={5}>
             <ProfileCard />
             <ContactCard />
           </VStack>
         </GridItem>
-        <GridItem rowSpan={1} colSpan={2} bgColor={'blue'}>
+        <GridItem
+          rowSpan={1}
+          colSpan={2}
+          overflow={'auto'}
+          mr={5}
+          sx={{
+            '::-webkit-scrollbar': {
+              display: 'none',
+            },
+          }}>
           {props.children}
         </GridItem>
       </Grid>
