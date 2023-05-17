@@ -1,4 +1,4 @@
-import { Box, Divider, useColorModeValue } from '@chakra-ui/react'
+import { Box, useColorModeValue } from '@chakra-ui/react'
 import { CONFIG, isDev } from 'config'
 import { ExtendedRecordMap } from 'notion-types'
 import { getAllPagesInSpace } from 'notion-utils'
