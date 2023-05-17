@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/router'
 import { useCache } from 'src/common/hooks/useCache'
 import { TNotionPost } from 'src/common/libraries/notion/types'
-import { convertDateToString } from 'src/utils/convert_data_to_string'
+import { convertDateFormat, convertDateToString } from 'src/utils/convert_data_to_string'
 
 type PostItemProps = {
   postData: TNotionPost
@@ -70,7 +70,7 @@ export default function PostItem(props: PostItemProps) {
 
           {/* createAt */}
           <Text fontSize={14} fontWeight={'medium'} color={'gray.400'}>
-            {convertDateToString(item.createdTime)}
+            {convertDateFormat(item?.properties.createdAt)}
           </Text>
 
           {/* description */}

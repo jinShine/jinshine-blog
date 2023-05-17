@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { CONFIG } from 'config'
 import { TNotionPost } from 'src/common/libraries/notion/types'
-import { convertDateToString } from 'src/utils/convert_data_to_string'
+import { convertDateFormat, convertDateToString } from 'src/utils/convert_data_to_string'
 
 type PostDetailHeaderProps = {
   postData: TNotionPost | null | undefined
@@ -52,7 +52,7 @@ export default function PostDetailHeader(props: PostDetailHeaderProps) {
             fontSize={16}
             fontWeight={'medium'}
             color={useColorModeValue('gray.500', 'gray.400')}>
-            {convertDateToString(item?.createdTime ?? '')}
+            {convertDateFormat(item?.properties.createdAt ?? '')}
           </Text>
         </HStack>
         {/* tags */}
