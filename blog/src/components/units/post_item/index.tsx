@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/router'
 import { useCache } from 'src/common/hooks/useCache'
 import { TNotionPost } from 'src/common/libraries/notion/types'
-import { convertDateFormat, convertDateToString } from 'src/utils/convert_data_to_string'
+import { convertDateFormat } from 'src/utils/convert_data_to_string'
 
 type PostItemProps = {
   postData: TNotionPost
@@ -19,11 +19,11 @@ type PostItemProps = {
 
 export default function PostItem(props: PostItemProps) {
   const router = useRouter()
-  const { saveDatas } = useCache()
+  const { setSelectedPost } = useCache()
   const item = props.postData
 
   const onClickItem = () => {
-    saveDatas({ post: item })
+    setSelectedPost(item)
     router.push(`posts/${props.postData.id}`)
   }
 
@@ -61,7 +61,6 @@ export default function PostItem(props: PostItemProps) {
             </Tag>
           </Box>
         )}
-
         <VStack width={'100%'} align={'flex-start'} p={'16px'}>
           {/* title */}
           <Text fontSize={22} fontWeight={'bold'}>

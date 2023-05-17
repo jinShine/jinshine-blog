@@ -57,7 +57,11 @@ type PostDetailProps = {
 }
 
 const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailProps) => {
-  const { datas } = useCache()
+  const { selectedPost } = useCache()
+
+  if (typeof window !== 'object') {
+    return <></>
+  }
 
   return (
     <Box
@@ -66,10 +70,11 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
       borderRadius={'xl'}
       boxShadow={'sm'}
       bgColor={useColorModeValue('point.light', 'point.dark')}>
-      <PostDetailHeader postData={datas?.post} />
+      {selectedPost && <PostDetailHeader postData={selectedPost} />}
+
       <NotionPage recordMap={props.recordMap} rootPageId={CONFIG.notion.rootDatabaseId} />
       <Box mt={20} pb={5} px={{ base: 4, sm: '20px', md: '44px', lg: '68px' }}>
-        <CommentBox postData={datas?.post} />
+        {selectedPost && <CommentBox postData={selectedPost} />}
       </Box>
     </Box>
   )

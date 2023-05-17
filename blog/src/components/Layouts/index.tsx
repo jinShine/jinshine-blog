@@ -6,6 +6,7 @@ import Footer from './footer'
 import Header from './header'
 import Metadata, { MetadataProps } from './meta'
 import { useRouter } from 'next/router'
+import CategoryList from '../units/category_list'
 
 type LayoutProps = {
   children: ReactNode
@@ -67,6 +68,7 @@ export default function Layout(props: LayoutProps) {
             <VStack spacing={5}>
               <ProfileCard />
               <ContactCard />
+              <CategoryList />
             </VStack>
           </GridItem>
           <GridItem
