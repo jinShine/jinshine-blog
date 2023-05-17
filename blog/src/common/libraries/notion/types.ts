@@ -1,7 +1,5 @@
 export type TNotionPost = {
   id: string
-  createdTime: string
-  lastEditedTime?: string
   url?: string | undefined
   properties: TProperties
 }
@@ -12,6 +10,7 @@ export type TProperties = {
   tags?: TTags[]
   description?: string
   category?: string
+  createdAt: string
 }
 
 export type TTags = {

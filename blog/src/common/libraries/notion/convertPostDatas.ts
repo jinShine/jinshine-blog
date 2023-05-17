@@ -12,12 +12,11 @@ export const convertPostDatas = (posts: QueryDatabaseResponse) => {
       })),
       description: post.properties.description.rich_text[0]?.text.content ?? '',
       category: post.properties.category.select?.name ?? '',
+      createdAt: post.properties.createdAt.date?.start ?? '',
     }
 
     const postData: TNotionPost = {
       id: post.id,
-      createdTime: post.created_time,
-      lastEditedTime: post.last_edited_time,
       url: post.url,
       properties: properties,
     }

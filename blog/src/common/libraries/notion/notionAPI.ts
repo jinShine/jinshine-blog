@@ -21,7 +21,10 @@ export async function getPosts(): Promise<QueryDatabaseResponse> {
   const response = await notion.databases.query({
     database_id: databaseId,
     filter: {
-      or: [],
+      property: 'publish',
+      checkbox: {
+        equals: true,
+      },
     },
     sorts: [
       {

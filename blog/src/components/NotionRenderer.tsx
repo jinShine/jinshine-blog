@@ -144,6 +144,7 @@ export const NotionPage = ({
         recordMap={recordMap}
         darkMode={colorMode === 'dark'}
         fullPage={false}
+        disableHeader={true}
         components={{
           nextLink: Link,
           Code,
