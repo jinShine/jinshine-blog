@@ -1,4 +1,4 @@
-import { Box, useColorModeValue } from '@chakra-ui/react'
+import { Box, Divider, useColorModeValue } from '@chakra-ui/react'
 import { CONFIG, isDev } from 'config'
 import { ExtendedRecordMap } from 'notion-types'
 import { getAllPagesInSpace } from 'notion-utils'
@@ -8,6 +8,7 @@ import { useCache } from 'src/common/hooks/useCache'
 import * as notion from 'src/common/libraries/notion/notionAPI'
 import Layout from 'src/components/Layouts'
 import { NotionPage } from 'src/components/NotionRenderer'
+import CommentBox from 'src/components/units/comment_box'
 import PostDetailHeader from 'src/components/units/post_detail_header'
 
 export async function getStaticPaths() {
@@ -67,6 +68,9 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
       bgColor={useColorModeValue('point.light', 'point.dark')}>
       <PostDetailHeader postData={datas?.post} />
       <NotionPage recordMap={props.recordMap} rootPageId={CONFIG.notion.rootDatabaseId} />
+      <Box mt={20}>
+        <CommentBox postData={datas?.post} />
+      </Box>
     </Box>
   )
 }

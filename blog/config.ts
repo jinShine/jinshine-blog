@@ -18,6 +18,14 @@ export const CONFIG = {
     rootDatabaseId: process.env.NOTION_DATABASE_ID ?? '',
     token: process.env.NOTION_TOKEN ?? '',
   },
+  utterances: {
+    enable: true,
+    config: {
+      repo: 'jinShine/jinshine-blog',
+      'issue-term': 'pathname',
+      label: '💬 Utterances',
+    },
+  },
   lang: 'ko-KR',
   seo: { keywords: ['Blog', 'Website', 'Notion'] },
   link: '',
