@@ -14,7 +14,7 @@ type HomeProps = {
 export async function getStaticProps() {
   const posts = await getPosts()
   const result = convertPostDatas(posts)
-  console.log('# Posts 데이터 : ', result)
+  // console.log('# Posts 데이터 : ', posts)
 
   return {
     props: { posts: result },

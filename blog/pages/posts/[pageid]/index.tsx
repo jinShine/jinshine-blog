@@ -68,7 +68,7 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
       bgColor={useColorModeValue('point.light', 'point.dark')}>
       <PostDetailHeader postData={datas?.post} />
       <NotionPage recordMap={props.recordMap} rootPageId={CONFIG.notion.rootDatabaseId} />
-      <Box mt={20} pb={5}>
+      <Box mt={20} pb={5} px={{ base: 4, sm: '20px', md: '44px', lg: '68px' }}>
         <CommentBox postData={datas?.post} />
       </Box>
     </Box>

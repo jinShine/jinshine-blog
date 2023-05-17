@@ -20,7 +20,7 @@ export default function PostDetailHeader(props: PostDetailHeaderProps) {
   const item = props.postData
 
   return (
-    <Box width={'full'} p={10}>
+    <Box width={'full'} py={10} px={{ base: 4, sm: '20px', md: '44px', lg: '68px' }}>
       <Tag mt={5} ml={4} bgColor={'blue.400'} color={'gray.50'}>
         {item?.properties.category}
       </Tag>
