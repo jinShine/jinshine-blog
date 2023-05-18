@@ -71,7 +71,6 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
       boxShadow={'sm'}
       bgColor={useColorModeValue('point.light', 'point.dark')}>
       {selectedPost && <PostDetailHeader postData={selectedPost} />}
-
       <NotionPage recordMap={props.recordMap} rootPageId={CONFIG.notion.rootDatabaseId} />
       <Box mt={20} pb={5} px={{ base: 4, sm: '20px', md: '44px', lg: '68px' }}>
         {selectedPost && <CommentBox postData={selectedPost} />}

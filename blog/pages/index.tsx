@@ -17,7 +17,7 @@ type HomeProps = {
 }
 
 export async function getServerSideProps(context) {
-  const query = context.query.tag
+  const query = context.query.category
 
   const posts = await getPosts()
   const convertPosts = convertPostDatas(posts)
