@@ -99,7 +99,6 @@ export const NotionPage = ({
   }
 
   const title = getPageTitle(recordMap)
-  console.info(title, recordMap)
 
   // useful for debugging from the dev console
   if (typeof window !== 'undefined') {
