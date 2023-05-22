@@ -16,7 +16,7 @@ type HomeProps = {
   categories: { category: string; length: number }[]
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const query = context.query.category
 
   const posts = await getPosts()

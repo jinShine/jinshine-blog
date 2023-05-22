@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useEffect, useState } from 'react'
 import ChakraUISetting from 'src/common/libraries/chakraUI'
 import { RecoilRoot } from 'recoil'
 /** react-notion-x */
@@ -19,10 +19,20 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || (page => page)
 
+  const [domLoaded, setDomLoaded] = useState(false)
+
+  useEffect(() => {
+    setDomLoaded(true)
+  }, [])
+
   return (
-    <RecoilRoot>
-      <ChakraUISetting>{getLayout(<Component {...pageProps} />)}</ChakraUISetting>
-    </RecoilRoot>
+    <>
+      {domLoaded && (
+        <RecoilRoot>
+          <ChakraUISetting>{getLayout(<Component {...pageProps} />)}</ChakraUISetting>
+        </RecoilRoot>
+      )}
+    </>
   )
 }
 

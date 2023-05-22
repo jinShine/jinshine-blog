@@ -1,9 +1,8 @@
 import { Box, useColorModeValue } from '@chakra-ui/react'
-import { CONFIG, isDev } from 'config'
+import { CONFIG } from 'config'
+import { useRouter } from 'next/router'
 import { ExtendedRecordMap } from 'notion-types'
-import { getAllPagesInSpace } from 'notion-utils'
 import { NextPageWithLayout } from 'pages/_app'
-import { defaultMapPageUrl } from 'react-notion-x'
 import { useCache } from 'src/common/hooks/useCache'
 import * as notion from 'src/common/libraries/notion/notionAPI'
 import Layout from 'src/components/Layouts'
@@ -11,44 +10,21 @@ import { NotionPage } from 'src/components/NotionRenderer'
 import CommentBox from 'src/components/units/comment_box'
 import PostDetailHeader from 'src/components/units/post_detail_header'
 
-export async function getStaticPaths() {
-  if (isDev) {
+export const getServerSideProps = async (context: any) => {
+  const { pageid } = context.params
+
+  try {
+    const recordMap = await notion.getPage(pageid)
+
     return {
-      paths: [],
-      fallback: true,
+      props: {
+        recordMap,
+      },
     }
-  }
-
-  const mapPageUrl = defaultMapPageUrl(CONFIG.notion.rootDatabaseId)
-
-  const pages = await getAllPagesInSpace(
-    CONFIG.notion.rootDatabaseId,
-    undefined,
-    notion.getPage,
-    {
-      traverseCollections: false,
-    },
-  )
-
-  const paths = Object.keys(pages)
-    .map(pageId => mapPageUrl(pageId))
-    .filter(path => path && path !== '/')
-
-  return {
-    paths,
-    fallback: true,
-  }
-}
-
-export const getStaticProps = async context => {
-  const pageId = context.params.pageid as string
-  const recordMap = await notion.getPage(pageId)
-
-  return {
-    props: {
-      recordMap,
-    },
-    revalidate: 10,
+  } catch (error) {
+    return {
+      notFound: true,
+    }
   }
 }
 
@@ -57,10 +33,11 @@ type PostDetailProps = {
 }
 
 const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailProps) => {
+  const router = useRouter()
   const { selectedPost } = useCache()
 
-  if (typeof window !== 'object') {
-    return <></>
+  if (router.isFallback) {
+    return <>에러!!~!~!~</>
   }
 
   return (

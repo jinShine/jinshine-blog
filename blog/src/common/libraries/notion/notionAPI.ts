@@ -29,7 +29,7 @@ export async function getPosts(): Promise<QueryDatabaseResponse> {
     sorts: [
       {
         property: 'createdAt',
-        direction: 'ascending',
+        direction: 'descending',
       },
     ],
   })
