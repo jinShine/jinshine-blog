@@ -16,6 +16,7 @@ const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
   return (
     <Head>
       <title>{meta.title}</title>
+      <meta name="robots" content="follow, index" />
       <meta charSet="UTF-8" />
       {CONFIG.seo.keywords && (
         <meta name="keywords" content={CONFIG.seo.keywords.join(', ')} />
@@ -28,6 +29,10 @@ const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
       <meta property="og:url" content={meta.url} />
       {CONFIG.lang && <meta property="og:locale" content={CONFIG.lang} />}
       {meta.image && <meta property="og:image" content={meta.image} />}
+      <>
+        <meta property="article:published_time" content={meta.date} />
+        <meta property="article:author" content={CONFIG.profile.nickname} />
+      </>
     </Head>
   )
 }

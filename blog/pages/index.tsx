@@ -56,7 +56,8 @@ HomePage.getLayout = function getlayout(page) {
       metadata={{
         title: CONFIG.blog.title,
         description: CONFIG.blog.description,
-        type: 'website',
+        type: 'Website',
+        image: CONFIG.profile.image,
         url: CONFIG.link,
       }}>
       {page}

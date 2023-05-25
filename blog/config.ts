@@ -1,3 +1,10 @@
+// ENV 환경
+export const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
+
+// URL 환경
+export const port = process.env.PORT || 3000
+export const rootDomain = isDev ? `localhost:${port}` : null
+
 // configs
 export const CONFIG = {
   blog: {
@@ -28,12 +35,5 @@ export const CONFIG = {
   },
   lang: 'ko-KR',
   seo: { keywords: ['Blog', 'Website', 'Notion'] },
-  link: '',
+  link: 'https://jinshine-blog.vercel.app',
 }
-
-// ENV 환경
-export const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-
-// URL 환경
-export const port = process.env.PORT || 3000
-export const rootDomain = isDev ? `localhost:${port}` : null
