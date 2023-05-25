@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -7,11 +6,10 @@ import { ExtendedRecordMap } from 'notion-types'
 import { getPageTitle } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 
-import { Loading } from './Loading'
-import { CONFIG } from 'config'
-import Image from 'next/image'
 import { useColorMode } from '@chakra-ui/react'
+import Image from 'next/image'
 import {} from 'prismjs'
+import { Loading } from './Loading'
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
 // -----------------------------------------------------------------------------
@@ -109,37 +107,8 @@ export const NotionPage = ({
     g.block = block
   }
 
-  const socialDescription = CONFIG.blog.description
-  const socialImage = CONFIG.profile.image
-
   return (
     <>
-      <Head>
-        {socialDescription && (
-          <>
-            <meta name="description" content={socialDescription} />
-            <meta property="og:description" content={socialDescription} />
-            <meta name="twitter:description" content={socialDescription} />
-          </>
-        )}
-
-        {socialImage ? (
-          <>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={socialImage} />
-            <meta property="og:image" content={socialImage} />
-          </>
-        ) : (
-          <meta name="twitter:card" content="summary" />
-        )}
-
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:creator" content="@transitive_bs" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <NotionRenderer
         recordMap={recordMap}
         darkMode={colorMode === 'dark'}

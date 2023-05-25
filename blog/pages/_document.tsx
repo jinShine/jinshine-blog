@@ -16,8 +16,10 @@ class MyDocument extends Document {
             type="application/rss+xml"
             title="RSS 2.0"
             href="/feed"></link>
-          <meta property="og:title" content="jinShine 블로그" />
-          <meta property="og:description" content={`${CONFIG.blog.description}`} />
+          <meta property="og:title" content={CONFIG.blog.title} />
+          <meta property="og:description" content={CONFIG.blog.description} />
+          <meta property="og:image" content={CONFIG.profile.image} />
+          <meta property="article:author" content={CONFIG.profile.nickname} />
         </Head>
         <body>
           <Main />
