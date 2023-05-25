@@ -3,8 +3,9 @@ import { CONFIG } from 'config'
 import { useRouter } from 'next/router'
 import { ExtendedRecordMap } from 'notion-types'
 import { NextPageWithLayout } from 'pages/_app'
-import { useCache } from 'src/common/hooks/useCache'
+import { convertPostDatas } from 'src/common/libraries/notion/convertPostDatas'
 import * as notion from 'src/common/libraries/notion/notionAPI'
+import { TNotionPost } from 'src/common/libraries/notion/types'
 import Layout from 'src/components/Layouts'
 import { NotionPage } from 'src/components/NotionRenderer'
 import CommentBox from 'src/components/units/comment_box'
@@ -15,10 +16,14 @@ export const getServerSideProps = async (context: any) => {
 
   try {
     const recordMap = await notion.getPage(pageid)
+    const posts = await notion.getPosts()
+    const convertPosts = convertPostDatas(posts)
+    const post = convertPosts.filter(post => post.id === pageid)[0]
 
     return {
       props: {
         recordMap,
+        post,
       },
     }
   } catch (error) {
@@ -30,11 +35,11 @@ export const getServerSideProps = async (context: any) => {
 
 type PostDetailProps = {
   recordMap: ExtendedRecordMap
+  post: TNotionPost
 }
 
 const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailProps) => {
   const router = useRouter()
-  const { selectedPost } = useCache()
 
   if (router.isFallback) {
     return <>에러!!~!~!~</>
@@ -47,23 +52,26 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
       borderRadius={'xl'}
       boxShadow={'sm'}
       bgColor={useColorModeValue('point.light', 'point.dark')}>
-      {selectedPost && <PostDetailHeader postData={selectedPost} />}
+      <PostDetailHeader postData={props.post} />
       <NotionPage recordMap={props.recordMap} rootPageId={CONFIG.notion.rootDatabaseId} />
       <Box mt={20} pb={5} px={{ base: 4, sm: '20px', md: '44px', lg: '68px' }}>
-        {selectedPost && <CommentBox postData={selectedPost} />}
+        <CommentBox postData={props.post} />
       </Box>
     </Box>
   )
 }
 
 PostDetailPage.getLayout = function getlayout(page) {
+  const post = page.props?.post as TNotionPost
+
   return (
     <Layout
       metadata={{
-        title: CONFIG.blog.title,
-        description: CONFIG.blog.description,
-        type: 'website',
-        url: CONFIG.link,
+        title: post.properties.title ?? CONFIG.blog.title,
+        description: post.properties.description ?? CONFIG.blog.description,
+        type: 'Website',
+        image: post.properties.thumbnail,
+        url: `${CONFIG.link}/${post.id}`,
       }}>
       {page}
     </Layout>

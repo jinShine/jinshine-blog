@@ -1,12 +1,11 @@
-import { Box, Divider, Grid, GridItem, VStack, useColorModeValue } from '@chakra-ui/react'
+import { Box, Grid, GridItem, VStack, useColorModeValue } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
+import CategoryList from '../units/category_list'
 import ContactCard from '../units/contact_card'
 import ProfileCard from '../units/profile_card'
-import Footer from './footer'
 import Header from './header'
 import Metadata, { MetadataProps } from './meta'
-import { useRouter } from 'next/router'
-import CategoryList from '../units/category_list'
 
 type LayoutProps = {
   children: ReactNode
@@ -85,7 +84,6 @@ export default function Layout(props: LayoutProps) {
             <VStack spacing={3} mb={10} display={{ base: 'block', md: 'none ' }}>
               <ProfileCard isMobile={true} />
               <CategoryList isMobile={true} />
-              <Divider />
             </VStack>
             {props.children}
           </GridItem>

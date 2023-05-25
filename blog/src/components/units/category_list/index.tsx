@@ -1,4 +1,15 @@
-import { Button, Divider, HStack, Text, VStack } from '@chakra-ui/react'
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Button,
+  Divider,
+  Text,
+  VStack,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useCache } from 'src/common/hooks/useCache'
 
@@ -20,25 +31,37 @@ export default function CategoryList(props: CategoryListProps) {
     <>
       {props.isMobile ? (
         <VStack width={'full'} align={'flex-start'} pt={5} pl={1}>
-          <Text fontSize={17} fontWeight={'bold'}>
-            카테고리
-          </Text>
-          <HStack>
-            {categories.map((item, index) => (
-              <Button
-                key={index}
-                variant={'ghost'}
-                size={'sm'}
-                fontSize={15}
-                fontWeight={'normal'}
-                onClick={onClickCategory(item.category)}>
-                {`${item.category}`}
-                <Text fontSize={14} color={'gray.500'}>
-                  &nbsp;{`(${item.length})`}
+          <Accordion
+            allowToggle
+            width={'full'}
+            bg={useColorModeValue('bg.light', 'bg.dark')}>
+            <AccordionItem>
+              <AccordionButton>
+                <Text fontSize={14} fontWeight={'bold'} flex={1} textAlign={'left'}>
+                  카테고리
                 </Text>
-              </Button>
-            ))}
-          </HStack>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <VStack width={'full'}>
+                  {categories.map((item, index) => (
+                    <Button
+                      key={index}
+                      variant={'ghost'}
+                      size={'sm'}
+                      fontSize={12}
+                      fontWeight={'normal'}
+                      onClick={onClickCategory(item.category)}>
+                      {`${item.category}`}
+                      <Text fontSize={14} color={'gray.500'}>
+                        &nbsp;{`(${item.length})`}
+                      </Text>
+                    </Button>
+                  ))}
+                </VStack>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
         </VStack>
       ) : (
         <VStack width={'full'} align={'flex-start'} pt={5} pl={3}>

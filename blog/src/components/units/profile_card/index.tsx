@@ -14,22 +14,22 @@ export default function ProfileCard(props: ProfileCardProps) {
       overflow={'hidden'}
       bg={useColorModeValue('point.light', 'point.dark')}>
       {props.isMobile ? (
-        <HStack spacing={5} h={'150px'}>
+        <HStack spacing={2} h={'130px'}>
           <Image
             src={CONFIG.profile.image}
             borderRadius={'full'}
-            w={'90px'}
-            h={'90px'}
+            w={'80px'}
+            h={'80px'}
             mx={5}
           />
           <VStack align={'flex-start'} spacing={0}>
-            <Text fontSize={20} fontWeight={'bold'}>
+            <Text fontSize={16} fontWeight={'bold'}>
               {CONFIG.profile.nickname}
             </Text>
-            <Text fontSize={15} fontWeight={400} color={'#6B7280'}>
+            <Text fontSize={13} fontWeight={400} color={'#6B7280'}>
               {CONFIG.profile.role}
             </Text>
-            <Text fontSize={15} fontWeight={600} pt={3}>
+            <Text fontSize={13} fontWeight={600} pt={3}>
               {CONFIG.profile.description}
             </Text>
           </VStack>
