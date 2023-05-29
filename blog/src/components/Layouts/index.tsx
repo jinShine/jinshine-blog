@@ -48,7 +48,6 @@ export default function Layout(props: LayoutProps) {
         <Grid
           mx={'auto'}
           maxW={'1120px'}
-          h={'100vh'}
           mt={10}
           mb={10}
           templateRows={'repeat(1, 1fr)'}
@@ -75,7 +74,7 @@ export default function Layout(props: LayoutProps) {
           <GridItem
             rowSpan={1}
             colSpan={2}
-            overflow={'auto'}
+            overflow={'inherit'}
             mx={5}
             sx={{
               '::-webkit-scrollbar': {
