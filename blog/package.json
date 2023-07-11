@@ -14,6 +14,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@notionhq/client": "^2.2.5",
+    "@tanstack/react-query": "^4.29.19",
     "@types/lqip-modern": "^1.1.3",
     "@types/prismjs": "^1.26.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
