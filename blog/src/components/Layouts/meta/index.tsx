@@ -1,6 +1,5 @@
 import { CONFIG } from 'config'
 import Head from 'next/head'
-import { Helmet } from 'react-helmet-async'
 
 export type MetadataProps = {
   title: string
@@ -15,7 +14,7 @@ const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
   const meta = { ...props }
 
   return (
-    <Helmet>
+    <Head>
       <title>{meta.title}</title>
       <meta name="robots" content="follow, index" />
       <meta charSet="UTF-8" />
@@ -34,7 +33,7 @@ const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
         <meta property="article:published_time" content={meta.date} />
         <meta property="article:author" content={CONFIG.profile.nickname} />
       </>
-    </Helmet>
+    </Head>
   )
 }
 
