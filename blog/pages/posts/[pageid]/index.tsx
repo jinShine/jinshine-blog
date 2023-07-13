@@ -1,12 +1,11 @@
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { CONFIG } from 'config'
-import { useRouter } from 'next/router'
 import { ExtendedRecordMap } from 'notion-types'
 import { NextPageWithLayout } from 'pages/_app'
 import { convertPostDatas } from 'src/common/libraries/notion/convertPostDatas'
 import * as notion from 'src/common/libraries/notion/notionAPI'
 import { TNotionPost } from 'src/common/libraries/notion/types'
-import Layout from 'src/components/Layouts'
+import Layout from 'src/components/@common/layout'
 import { NotionPage } from 'src/components/NotionRenderer'
 import CommentBox from 'src/components/units/comment_box'
 import PostDetailHeader from 'src/components/units/post_detail_header'
@@ -39,12 +38,6 @@ type PostDetailProps = {
 }
 
 const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailProps) => {
-  const router = useRouter()
-
-  if (router.isFallback) {
-    return <>에러!!~!~!~</>
-  }
-
   return (
     <Box
       width={'full'}
@@ -63,6 +56,8 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
 
 PostDetailPage.getLayout = function getlayout(page) {
   const post = page.props?.post as TNotionPost
+
+  console.log('@@@@@@@@@@@ Detail : ', post)
 
   return (
     <Layout

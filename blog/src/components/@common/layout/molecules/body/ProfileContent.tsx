@@ -1,19 +1,10 @@
-import { Box, HStack, Image, Text, VStack, useColorModeValue } from '@chakra-ui/react'
+import { HStack, Image, Text, VStack } from '@chakra-ui/react'
 import { CONFIG } from 'config'
 
-type ProfileCardProps = {
-  isMobile: boolean
-}
-
-export default function ProfileCard(props: ProfileCardProps) {
+export function ProfileContent({ isMobile }: { isMobile: boolean }) {
   return (
-    <Box
-      width={'full'}
-      borderRadius={'xl'}
-      boxShadow={'sm'}
-      overflow={'hidden'}
-      bg={useColorModeValue('point.light', 'point.dark')}>
-      {props.isMobile ? (
+    <>
+      {isMobile ? (
         <HStack spacing={2} h={'130px'}>
           <Image
             src={CONFIG.profile.image}
@@ -48,6 +39,6 @@ export default function ProfileCard(props: ProfileCardProps) {
           </Text>
         </VStack>
       )}
-    </Box>
+    </>
   )
 }
