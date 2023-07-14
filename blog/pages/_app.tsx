@@ -6,8 +6,8 @@ import 'katex/dist/katex.min.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'react-notion-x/src/styles.css'
 import { usePageLoading } from 'src/common/hooks/useLoading'
-import AppRegister from 'src/components/AppRegister'
 import PageSpinner from 'src/components/@common/spinner/PageSpinner'
+import AppRegister from 'src/components/AppRegister'
 
 export type NextPageWithLayout<PageProps = {}> = NextPage<PageProps> & {
   getLayout?: (page: ReactElement) => ReactNode

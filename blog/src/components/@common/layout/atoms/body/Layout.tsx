@@ -13,6 +13,7 @@ export function BodyLayout({ children, isSidebarLeftHidden }: TBodyLayoutProps) 
     <Grid
       mx={'auto'}
       maxW={LAYOUT_MAX_WIDTH}
+      minHeight={'100vh'}
       mt={10}
       mb={10}
       templateRows={'repeat(1, 1fr)'}

@@ -5,7 +5,7 @@ export function HeaderLeft() {
   const router = useRouter()
 
   const onClickHome = () => {
-    router.push('home')
+    router.push('/')
   }
 
   return (

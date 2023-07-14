@@ -1,57 +1,21 @@
-import { VStack } from '@chakra-ui/react'
 import { CONFIG } from 'config'
 import { NextPageWithLayout } from 'pages/_app'
-import { useEffect } from 'react'
-import { useCache } from 'src/common/hooks/useCache'
-import { convertPostDatas } from 'src/common/libraries/notion/convertPostDatas'
-import { filteredPosts } from 'src/common/libraries/notion/filteredPosts'
-import { getCategories } from 'src/common/libraries/notion/getCategories'
-import { getPosts } from 'src/common/libraries/notion/notionAPI'
-import { TNotionPost } from 'src/common/libraries/notion/types'
 import Layout from 'src/components/@common/layout'
-import PostItem from 'src/components/units/post_item'
+import Spinner from 'src/components/@common/spinner/Spinner'
+import { ErrorText } from 'src/components/@common/symbolText/ErrorText'
+import { Home } from 'src/components/units/home'
+import { useHomePage } from 'src/components/units/home/@hooks/useHomePage'
 
-type HomeProps = {
-  posts: TNotionPost[]
-  categories: { category: string; length: number }[]
-}
+const HomePage: NextPageWithLayout = () => {
+  const { posts, error, loading, onClick } = useHomePage()
 
-export async function getServerSideProps(context: any) {
-  const query = context.query.category
-
-  const posts = await getPosts()
-  const convertPosts = convertPostDatas(posts)
-  const categories = getCategories(convertPosts)
-
-  const results = filteredPosts(convertPosts, query)
-
-  return {
-    props: {
-      posts: results,
-      categories,
-    },
-  }
-}
-
-const HomePage: NextPageWithLayout<HomeProps> = (props: HomeProps) => {
-  const { setPosts, setCategories } = useCache()
-  // const { data: posts, isLoading } = useQuery({
-  //   queryKey: ['posts'],
-  //   queryFn: getPosts,
-  //   initialData: props.posts,
-  // })
-
-  useEffect(() => {
-    setPosts(props.posts)
-    setCategories(props.categories)
-  }, [props.posts])
+  if (loading) return <Spinner />
+  if (error) return <ErrorText />
 
   return (
-    <VStack width={'100%'} spacing={10}>
-      {props.posts.map(post => (
-        <PostItem key={post.id} postData={post} />
-      ))}
-    </VStack>
+    <Home.Layout>
+      <Home.PostList posts={posts} onClick={onClick} />
+    </Home.Layout>
   )
 }
 
