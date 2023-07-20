@@ -21,9 +21,9 @@ export default function PageSpinner() {
         color="point.primary"
         size="lg"
       />
-      <Text fontSize={'16px'} color={'font.black'}>
+      {/* <Text fontSize={'16px'} color={'font.black'}>
         데이터를 불러오는 중입니다.
-      </Text>
+      </Text> */}
     </VStack>
   )
 }
