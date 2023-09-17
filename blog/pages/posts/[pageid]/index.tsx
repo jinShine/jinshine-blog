@@ -64,7 +64,7 @@ PostDetailPage.getLayout = function getlayout(page) {
         description: post.properties.description ?? CONFIG.blog.description,
         type: 'Website',
         image: post.properties.thumbnail,
-        url: `${CONFIG.link}/${post.id}`,
+        url: `${CONFIG.link}/posts/${post.id}`,
       }}>
       {page}
     </Layout>
