@@ -13,6 +13,8 @@ export type MetadataProps = {
 const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
   const meta = { ...props }
 
+  console.log('Metadata :', meta)
+
   return (
     <Head>
       <title>{meta.title}</title>
@@ -27,8 +29,8 @@ const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
       <meta property="og:url" content={meta.url} />
-      <meta property="og:image" content={meta.image} />
       {CONFIG.lang && <meta property="og:locale" content={CONFIG.lang} />}
+      {meta.image && <meta property="og:image" content={meta.image} />}
       <>
         <meta property="article:published_time" content={meta.date} />
         <meta property="article:author" content={CONFIG.profile.nickname} />
