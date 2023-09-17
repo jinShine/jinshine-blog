@@ -57,8 +57,6 @@ const PostDetailPage: NextPageWithLayout<PostDetailProps> = (props: PostDetailPr
 PostDetailPage.getLayout = function getlayout(page) {
   const post = page.props?.post as TNotionPost
 
-  console.log('PostDetailPage :', post)
-
   return (
     <Layout
       metadata={{

@@ -13,8 +13,6 @@ export type MetadataProps = {
 const Metadata: React.FC<MetadataProps> = ({ ...props }) => {
   const meta = { ...props }
 
-  console.log('Metadata :', meta)
-
   return (
     <Head>
       <title>{meta.title}</title>

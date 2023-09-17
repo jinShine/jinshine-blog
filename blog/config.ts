@@ -12,7 +12,7 @@ export const CONFIG = {
     description: '기억하고 싶은 것을 정리하려 합니다.',
   },
   profile: {
-    image: '/images/Profile.jpg',
+    image: '/images/profile_image.jpg',
     nickname: 'jinShine',
     role: 'frontend developer',
     description: '去去去中知 行行行裏覺',
